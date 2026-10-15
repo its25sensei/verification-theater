@@ -42,42 +42,40 @@ wrong recommendation:
 | **C2 — Fake** | Professional-looking sources that cannot be verified (fabricated report titles, dead links) |
 | **C3 — Real** | Genuine, clickable, verifiable sources — whose interpretation is nonetheless misleading |
 
-Holding the recommendation and its wording constant isolates the causal effect
-of *verifiability* alone. The symmetric design (all conditions recommend the
-wrong option) trades some realism for clean causal inference.
+Holding the recommendation body constant isolates the effect of 
+*citation condition*, while the C2-versus-C3 contrast more specifically 
+examines citation verifiability.
 
 ---
 
-## Hypotheses & findings (on simulated data)
+## Hypotheses & simulated pipeline checks
 
-| # | Hypothesis | Result |
+| # | Expected pattern | Simulation check |
 |---|-----------|--------|
-| **H1** | Citations (C2, C3) raise trust vs no citation (C1) | Supported — large effect (d ≈ 1.2) |
-| **H2** | Fake ≈ Real on trust (appearance is enough) | Supported — no significant difference (p ≈ .91) |
+| **H1** | Citations (C2, C3) raise trust vs no citation (C1) | Pattern recovered in simulation; large standardized differences (d ≈ 1.2) |
+| **H2** | Trust does not meaningfully differ between fake and real citation conditions | The simulated dataset produced nearly identical trust means, but equivalence was not formally tested |
 | **H3** | Fake citations drive the most adoption of the *wrong* recommendation | Directionally supported — C2 highest (≈59% vs ≈43%) |
 | **Mechanism** | Fake sources raise *perceived verifiability* | Supported — C2 ≫ C1 (d ≈ 1.7) |
 | **Behavior** | "Verifiable ≠ verified": few check even real sources | Only ≈27% clicked the genuine, clickable source |
 
-> These results come from **simulated** data generated under the hypothesized
-> effect sizes; they demonstrate that the analysis pipeline correctly recovers
-> the predicted pattern, not empirical findings from human participants. The
-> omnibus test for H3 is borderline under the fixed random seed (a reminder that
-> adequate sample size matters); the key pairwise contrast (fake vs none) is
-> significant.
-
+> These outputs come from simulated data generated
+> under the hypothesized effect sizes. They demonstrate
+> whether the analysis pipeline recovers the patterns
+> built into the simulation; they are not empirical
+> findings from human participants.
 ---
 
 ## Figures
 
-**Fake citations lift trust as much as real ones (H1 + H2):**
+**Fake and real citation conditions show similar trust levels in the simulated dataset (H1 + H2):**
 
 ![Trust by condition](analysis/fig1_trust.png)
 
-**The cost — fake citations drive the most bad decisions (H3):**
+**Simulated adoption of the wrong recommendation is highest in the fake-citation condition (H3):**
 
 ![Adoption of the wrong recommendation](analysis/fig2_adoption.png)
 
-**Verifiable ≠ verified — fake sources *feel* checkable, yet almost nobody checks:**
+**Perceived verifiability and simulated source-click behavior:**
 
 ![Perceived verifiability and click-through](analysis/fig3_verification.png)
 
@@ -87,7 +85,7 @@ wrong option) trades some realism for clean causal inference.
 
 Trust is adapted from McKnight, Choudhury & Kacmar (2002), *Information Systems
 Research* (competence / benevolence / integrity). The study also measures
-perceived verifiability (a candidate mediator), decision confidence, actual
+perceived verifiability (a candidate mediator), decision confidence, 
 source-click behavior, plus manipulation and attention checks. Full instruments
 in [`materials/03_measures.md`](materials/03_measures.md).
 
@@ -96,7 +94,8 @@ in [`materials/03_measures.md`](materials/03_measures.md).
 ## Method notes
 
 - **Power analysis** ([`analysis/power_analysis.py`](analysis/power_analysis.py)):
-  target n ≈ 100/cell for 80% power; recruit 120/cell to absorb MTurk exclusions.
+  target n ≈ 100/cell for 80% power; planned recruitment target: 120 participants
+  per condition to absorb MTurk exclusions.
 - **Data quality:** attention checks, manipulation checks, ≥95% approval and
   ≥500 completed HITs as qualifications, completion-code verification.
 - **Ethics:** informed consent + full debrief (the design uses benign
@@ -117,12 +116,16 @@ verification_theater/
 │   ├── 04_consent_debrief.md    informed consent + debrief
 │   └── 05_mturk_setup.md        sampling, payment, qualifications, platform
 ├── analysis/
-│   ├── power_analysis.py        sample-size justification
-│   ├── simulate_and_analyze.py  simulate data + H1/H2/H3 + mechanism
-│   ├── make_figures.py          generate the three figures
-│   └── fig1–3_*.png             output figures
+│   ├── power_analysis.py
+│   ├── simulate_and_analyze.py
+│   ├── simulate_mediation_data.py
+│   ├── mediation_analysis.py
+│   ├── make_figures.py
+│   └── fig1–3_*.png
+│
 ├── data/
-│   └── simulated_data.csv       simulated dataset
+│   ├── simulated_data.csv
+│   └── simulated_mediation_data.csv
 └── docs/
     └── design.md                design rationale
 ```
@@ -132,12 +135,28 @@ verification_theater/
 ## How to run
 
 ```bash
-python3 analysis/power_analysis.py        # sample-size justification
-python3 analysis/simulate_and_analyze.py  # simulate data + H1/H2/H3 + mechanism
-python3 analysis/make_figures.py          # regenerate the three figures
+python3 analysis/power_analysis.py
+
+python3 analysis/simulate_and_analyze.py
+
+python3 analysis/make_figures.py
+
+python3 analysis/mediation_analysis.py \
+  --data data/simulated_data.csv \
+  --treatment C2_fake \
+  --reference C1_none \
+  --bootstrap 5000
+
+python3 analysis/simulate_mediation_data.py
+
+python3 analysis/mediation_analysis.py \
+  --data data/simulated_mediation_data.csv \
+  --treatment C2_fake \
+  --reference C1_none \
+  --bootstrap 5000
 ```
 
-Requires Python 3 with `numpy`, `scipy`, and `matplotlib`.
+Requires Python 3 with `numpy`, `pandas`, `scipy`, and `matplotlib`.
 
 ---
 
