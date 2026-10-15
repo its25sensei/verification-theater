@@ -2,10 +2,10 @@
 
 **Do unverifiable citations make AI recommendations more persuasive — without making decisions better?**
 
-A three-condition behavioral experiment on how the *verifiability* of an AI's
-source citations shapes consumer trust and decision quality. Complete
-experimental design plus a full analysis pipeline, demonstrated end-to-end on
-simulated data.
+A three-condition behavioral experiment on how the *presence and 
+verifiability of AI source citations* shape consumer trust and 
+decision quality. Complete experimental design plus a full analysis 
+pipeline, demonstrated end-to-end on simulated data.
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![Status](https://img.shields.io/badge/status-design%20%2B%20simulated%20analysis-orange)
@@ -54,9 +54,9 @@ examines citation verifiability.
 |---|-----------|--------|
 | **H1** | Citations (C2, C3) raise trust vs no citation (C1) | Pattern recovered in simulation; large standardized differences (d ≈ 1.2) |
 | **H2** | Trust does not meaningfully differ between fake and real citation conditions | The simulated dataset produced nearly identical trust means, but equivalence was not formally tested |
-| **H3** | Fake citations drive the most adoption of the *wrong* recommendation | Directionally supported — C2 highest (≈59% vs ≈43%) |
-| **Mechanism** | Fake sources raise *perceived verifiability* | Supported — C2 ≫ C1 (d ≈ 1.7) |
-| **Behavior** | "Verifiable ≠ verified": few check even real sources | Only ≈27% clicked the genuine, clickable source |
+| **H3** | Fake citations drive the most adoption of the *wrong* recommendation | Directional pattern recovered in simulation; C2 was highest (≈59% vs ≈43%) |
+| **Mechanism** | Fake sources raise *perceived verifiability* | Pattern recovered in simulation; C2 ≫ C1 (d ≈ 1.7) |
+| **Behavior** | "Verifiable ≠ verified": few check even real sources | Simulated C3 click-through was ≈27% |
 
 > These outputs come from simulated data generated
 > under the hypothesized effect sizes. They demonstrate
@@ -107,7 +107,7 @@ in [`materials/03_measures.md`](materials/03_measures.md).
 ## Repository structure
 
 ```
-verification_theater/
+verification-theater/
 ├── README.md
 ├── materials/
 │   ├── 01_product_specs.md      decision task & laptop specs
