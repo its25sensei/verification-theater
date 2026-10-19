@@ -13,7 +13,7 @@ recommendation, which laptop would you choose?
 - ( ) Laptop A
 - ( ) Laptop B   ← adopts the AI's wrong recommendation
 
-> Coding: choice_B = 1 indicates adoption of the wrong recommendation.
+> Coding: adopt_wrong = 1 indicates adoption of the wrong recommendation.
 > **This is the core dependent variable for H3.**
 
 ---
