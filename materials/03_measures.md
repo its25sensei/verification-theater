@@ -55,10 +55,14 @@ context (2 items per dimension, 6 items total; the mean is the trust score):
 **V2.** I could check the materials the AI assistant based its advice on.
 
 > perceived_verifiability = mean(V1, V2).
-> Expectation: C3 > C2 ≈ C1? — This is itself an interesting finding:
-> if C2 (fake citation) also shows higher perceived verifiability than C1,
-> it shows that "fake sources" can create an *appearance* of verifiability —
-> mechanistic evidence for theater.
+>
+> Expected pattern: C3 > C2 > C1.
+> The theoretically important contrast is whether fake citations (C2)
+> increase perceived verifiability relative to no citation (C1), even though
+> the cited sources are not genuinely verifiable.
+>
+> A higher C2 score relative to C1 would be consistent with the idea that
+> source-like cues can create an appearance of verifiability.
 
 ---
 
@@ -93,7 +97,9 @@ context (2 items per dimension, 6 items total; the mean is the trust score):
 **AC1.** (embedded in the middle of the trust scale) For this item, please select "3" to show you are reading carefully.
 1 — 2 — 3 — 4 — 5 — 6 — 7
 
-> Those who fail are pre-registered for exclusion (necessary for MTurk data quality).
+> Failure of this attention check is planned as a pre-specified exclusion
+> criterion for any future empirical study. Sensitivity analyses may also
+> compare results with and without excluded responses.
 
 ---
 
