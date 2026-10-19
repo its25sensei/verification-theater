@@ -1,7 +1,7 @@
 # Verification Theater: A Micro Behavioral Experiment Design
 
 ## Research question
-In AI recommendation systems, how does the **verifiability** of source
+In AI recommendation systems, how does the **presence and verifiability** of source
 citations affect consumer trust and decision quality?
 Core theoretical contribution: **verification theater** — unverifiable
 citations create an *appearance* of credibility, producing a lift in trust
