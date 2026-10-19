@@ -27,8 +27,6 @@
 
 > If budget-sensitive: first run a pilot (30 per cell, 90 total, ~$220) to
 > validate the procedure and effect direction, then decide on the full run.
-> For a "demonstrable output" goal, pilot data is often already enough to
-> write into an application.
 
 ## 5. Worker qualifications (MTurk)
 - HIT approval rate ≥ 95% (historical approval rate)
@@ -37,7 +35,7 @@
 - Each Worker may participate only once (use a qualification or external-platform de-duplication)
 
 ## 6. Anti-cheating / data-quality measures
-- Attention-check item (AC1): embedded in the scale; failures pre-registered for exclusion
+- Attention-check item (AC1): embedded in the scale; failures pre- specified for exclusion
 - Manipulation check (MC1): used for a sensitivity analysis
 - Minimum completion time: unusually fast completions (e.g. < 3 minutes) are flagged as suspect
 - Optional: minimum word count on open-ended items / consistency checks
@@ -54,8 +52,8 @@
 - See materials/04_consent_debrief.md
 - Anonymous, withdraw at any time, minimal risk
 - Note: the deception element (the AI deliberately gives a wrong recommendation) must be explained in the closing debrief
-- For formal publication, the researcher's institutional IRB approval is required;
-  as an individual pilot/learning project, basic ethics (consent + debrief) should still be followed
+- Any future collection of real participant data would proceed only under applicable institutional ethics/IRB requirements.
+  The consent and debrief materials in this repository are design templates.
 
 ## Items to verify online
 - [ ] MTurk 2026 current platform commission rate
