@@ -35,7 +35,7 @@
 - Each Worker may participate only once (use a qualification or external-platform de-duplication)
 
 ## 6. Anti-cheating / data-quality measures
-- Attention-check item (AC1): embedded in the scale; failures pre- specified for exclusion
+- Attention-check item (AC1): embedded in the scale; failures pre-specified for exclusion
 - Manipulation check (MC1): used for a sensitivity analysis
 - Minimum completion time: unusually fast completions (e.g. < 3 minutes) are flagged as suspect
 - Optional: minimum word count on open-ended items / consistency checks
