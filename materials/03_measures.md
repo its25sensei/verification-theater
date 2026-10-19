@@ -117,15 +117,15 @@ context (2 items per dimension, 6 items total; the mean is the trust score):
 
 ---
 
-## Variable summary (for alignment with the analysis scripts)
+## Variable summary
 | Variable | Meaning | Type |
 |----------|---------|------|
 | condition | C1/C2/C3 | factor |
-| choice_B | adopted wrong rec = 1 | binary (primary DV) |
-| trust_score | mean trust | continuous (primary DV) |
+| adopt_wrong | adopted wrong rec = 1 | binary (primary DV) |
+| trust | mean trust score | continuous (primary DV) |
 | confidence | decision confidence | continuous |
-| perceived_verif | perceived verifiability | continuous (mediator) |
-| verified | verified the source or not | binary |
+| perceived_verif | perceived verifiability | continuous (candidate mediator) |
+| clicked_source | clicked/viewed source = 1 | binary |
 | passed_mc | passed manipulation check | binary |
 | passed_ac | passed attention check | binary |
-| + demographics/controls | | |
+| + demographics/controls | planned participant-level controls | mixed |
