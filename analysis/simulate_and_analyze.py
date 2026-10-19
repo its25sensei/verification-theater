@@ -7,8 +7,17 @@ Hypotheses:
   H1  Trust(C2), Trust(C3) > Trust(C1)   (citations raise trust)
   H2  Trust(C2) ~= Trust(C3)             (appearance is enough -- the core of theater)
   H3  C2 has the highest adoption of the wrong recommendation (the cost of theater)
-Mechanism: perceived verifiability mediates trust;
-     C3 is checkable, yet few actually check -- "verifiable != verified".
+Mechanism-related check:
+  citation condition affects perceived verifiability, and the script
+  examines the descriptive association between perceived verifiability
+  and trust.
+
+Formal mediation is evaluated separately in mediation_analysis.py.
+The original simulation does not explicitly build a mediator-to-outcome
+effect into the data-generating process.
+
+C3 is genuinely checkable, while simulated source-click behavior remains low:
+"verifiable != verified".
 
 Code and comments in English; narrative interpretation in the README.
 """
@@ -75,10 +84,20 @@ for lbl, a, b in [("C2 vs C1", trust_arr[c2], trust_arr[c1]),
     t, pp = stats.ttest_ind(a, b)
     print(f"  H1 {lbl}: t={t:.2f}, p={pp:.4g}, d={cohens_d(a,b):.2f}")
 
-# H2: C2 vs C3  (expect NON-significant — the theater point)
+# H2-related comparison: C2 vs C3.
+# A non-significant difference does NOT establish equivalence.
 t, pp = stats.ttest_ind(trust_arr[c2], trust_arr[c3])
-print(f"  H2 C2 vs C3: t={t:.2f}, p={pp:.4g}, d={cohens_d(trust_arr[c2],trust_arr[c3]):.2f}"
-      f"   -> {'NS (supports H2)' if pp>0.05 else 'sig (H2 not supported)'}")
+d_h2 = cohens_d(trust_arr[c2], trust_arr[c3])
+
+if pp > 0.05:
+    interpretation = "no statistically significant difference detected"
+else:
+    interpretation = "statistically significant difference detected"
+
+print(
+    f"  H2 C2 vs C3: t={t:.2f}, p={pp:.4g}, d={d_h2:.2f}"
+    f" -> {interpretation}"
+)
 
 # ---------- 3. H3: adoption of the wrong recommendation ----------
 print("\n" + "="*60)
@@ -102,18 +121,22 @@ for a,b in combinations(["C1_none","C2_fake","C3_real"],2):
     z,pp = two_prop_z(counts[a],ns[a],counts[b],ns[b])
     print(f"  {a} ({counts[a]/ns[a]:.0%}) vs {b} ({counts[b]/ns[b]:.0%}): z={z:.2f}, p={pp:.4g}")
 
-# ---------- 4. Mechanism: perceived verifiability mediates trust ----------
+# ---------- 4. Perceived verifiability and trust association ----------
 print("\n" + "="*60)
-print("Mechanism — does perceived verifiability track the fake cite?")
+print("Perceived verifiability — does it track citation condition?")
 print("="*60)
 # Key theater evidence: C2 (fake) perceived verifiability >> C1, approaching C3
 for lbl,a,b in [("C2 vs C1", verif_arr[c2],verif_arr[c1]),
                 ("C3 vs C2", verif_arr[c3],verif_arr[c2])]:
     t,pp = stats.ttest_ind(a,b)
     print(f"  perceived_verif {lbl}: t={t:.2f}, p={pp:.4g}, d={cohens_d(a,b):.2f}")
-# simple mediation: verif -> trust correlation
-r,pr = stats.pearsonr(verif_arr, trust_arr)
-print(f"  corr(perceived_verif, trust): r={r:.2f}, p={pr:.4g}")
+# Descriptive association between perceived verifiability and trust.
+# This correlation is not a mediation test and may partly reflect
+# between-condition differences.
+r, pr = stats.pearsonr(verif_arr, trust_arr)
+print(
+    f"  corr(perceived_verif, trust): r={r:.2f}, p={pr:.4g}"
+)
 
 print("\n" + "="*60)
 print("Verification behavior — 'verifiable != verified'")
