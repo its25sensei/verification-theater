@@ -1,10 +1,11 @@
 """
-Figures for the verification-theater experiment (from simulated data).
-Three panels map onto the three core findings:
-  Fig 1  Trust:  H1 (cites > none) + H2 (fake ~ real)  -> "the theater works"
-  Fig 2  Adoption of the wrong recommendation: H3       -> "the cost"
-  Fig 3  Perceived verifiability + simulated click-through  -> "verifiable != verified"
+Figures for the verification-theater experiment, drawn from SIMULATED data.
+They show that the analysis pipeline runs end to end; they are not findings.
+  Fig 1  Trust in the AI by citation condition (H1, H2)
+  Fig 2  Adoption of the incorrect recommendation (H3)
+  Fig 3  Perceived verifiability and source clicks
 """
+NOTE = "Simulated data for pipeline validation. Not participant results."
 import csv, numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
@@ -33,13 +34,9 @@ fig,ax=plt.subplots(figsize=(6,4.2))
 means=[m_se(trust,m)[0] for m in masks]; ses=[m_se(trust,m)[1] for m in masks]
 bars=ax.bar(labels,means,yerr=ses,capsize=5,color=colors,edgecolor="black",linewidth=0.6)
 ax.set_ylabel("Trust in AI (1–7)"); ax.set_ylim(0,7)
-ax.set_title("Simulated trust by citation condition",fontweight="bold",fontsize=12)
-# annotate H2 (fake vs real = ns)
-y=max(means[1],means[2])+0.6
-ax.plot([1,2],[y,y],color="black",lw=1)
-ax.text(1.5,y+0.05,"n.s. (H2)",ha="center",fontsize=10,style="italic")
-ax.annotate("H1: citations lift trust",xy=(0.5,means[0]+0.3),fontsize=9,color="#555")
-plt.tight_layout(); plt.savefig("analysis/fig1_trust.png",dpi=150); plt.close()
+ax.set_title("Trust in the AI by citation condition (simulated data)",fontweight="bold",fontsize=12)
+fig.text(0.5,0.01,NOTE,ha="center",fontsize=8.5,color="#555",style="italic")
+plt.tight_layout(rect=(0,0.04,1,1)); plt.savefig("analysis/fig1_trust.png",dpi=150); plt.close()
 
 # ---- Fig 2: Adoption of wrong rec ----
 fig,ax=plt.subplots(figsize=(6,4.2))
@@ -47,23 +44,25 @@ rates=[adopt[m].mean() for m in masks]
 se=[np.sqrt(r*(1-r)/m.sum()) for r,m in zip(rates,masks)]
 ax.bar(labels,[r*100 for r in rates],yerr=[s*100 for s in se],capsize=5,
        color=colors,edgecolor="black",linewidth=0.6)
-ax.set_ylabel("Adopted the WRONG recommendation (%)"); ax.set_ylim(0,80)
-ax.set_title("Simulated adoption of the wrong recommendation",fontweight="bold",fontsize=12)
+ax.set_ylabel("Adopted the incorrect recommendation (%)"); ax.set_ylim(0,80)
+ax.set_title("Adoption of the incorrect recommendation (simulated data)",fontweight="bold",fontsize=12)
 ax.axhline(50,ls="--",color="#aaa",lw=0.8)
 for i,r in enumerate(rates): ax.text(i,r*100+2,f"{r*100:.0f}%",ha="center",fontweight="bold")
-plt.tight_layout(); plt.savefig("analysis/fig2_adoption.png",dpi=150); plt.close()
+fig.text(0.5,0.01,NOTE,ha="center",fontsize=8.5,color="#555",style="italic")
+plt.tight_layout(rect=(0,0.04,1,1)); plt.savefig("analysis/fig2_adoption.png",dpi=150); plt.close()
 
 # ---- Fig 3: perceived verifiability + click-through ----
 fig,(ax1,ax2)=plt.subplots(1,2,figsize=(9,4.2))
 vmeans=[m_se(verif,m)[0] for m in masks]; vses=[m_se(verif,m)[1] for m in masks]
 ax1.bar(labels,vmeans,yerr=vses,capsize=5,color=colors,edgecolor="black",linewidth=0.6)
 ax1.set_ylabel("Perceived verifiability (1–7)"); ax1.set_ylim(0,7)
-ax1.set_title("Simulated perceived verifiability",fontweight="bold",fontsize=11)
+ax1.set_title("Perceived verifiability",fontweight="bold",fontsize=11)
 crates=[click[m].mean() for m in masks]
 ax2.bar(labels,[c*100 for c in crates],color=colors,edgecolor="black",linewidth=0.6)
-ax2.set_ylabel("Clicked source in simulation (%)"); ax2.set_ylim(0,60)
-ax2.set_title("Simulated source-click rate",fontweight="bold",fontsize=11)
+ax2.set_ylabel("Clicked a source (%)"); ax2.set_ylim(0,60)
+ax2.set_title("Source clicks",fontweight="bold",fontsize=11)
 for i,c in enumerate(crates): ax2.text(i,c*100+1.5,f"{c*100:.0f}%",ha="center",fontweight="bold")
-fig.suptitle("Verifiable ≠ verified",fontsize=13,fontweight="bold")
-plt.tight_layout(); plt.savefig("analysis/fig3_verification.png",dpi=150); plt.close()
+fig.suptitle("Perceived verifiability and source clicks (simulated data)",fontsize=13,fontweight="bold")
+fig.text(0.5,0.01,NOTE,ha="center",fontsize=8.5,color="#555",style="italic")
+plt.tight_layout(rect=(0,0.04,1,1)); plt.savefig("analysis/fig3_verification.png",dpi=150); plt.close()
 print("Saved fig1_trust.png, fig2_adoption.png, fig3_verification.png")
