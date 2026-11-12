@@ -21,7 +21,7 @@ recommendation, which laptop would you choose?
 ## 2. Decision confidence
 
 **Q_conf.** How confident are you in the choice you just made?
-1 (not at all confident) — 7 (very confident)
+1 (not at all confident) — 4 (moderately confident) — 7 (very confident)
 
 ---
 
