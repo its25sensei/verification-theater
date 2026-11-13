@@ -7,6 +7,8 @@ verifiability of AI source citations* shape consumer trust and
 decision quality. Complete experimental design plus a full analysis 
 pipeline, demonstrated end-to-end on simulated data.
 
+Interactive prototype: see the [participant-facing interface](https://its25sensei.github.io/portfolio/#prototype).
+
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![Status](https://img.shields.io/badge/status-design%20%2B%20simulated%20analysis-orange)
 
