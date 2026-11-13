@@ -67,6 +67,8 @@ examines citation verifiability.
 
 ## Figures
 
+Simulated adoption of the wrong recommendation is highest in the fake-citation condition.
+
 **Fake and real citation conditions show similar trust levels in the simulated dataset (H1 + H2):**
 
 ![Trust by condition](analysis/fig1_trust.png)

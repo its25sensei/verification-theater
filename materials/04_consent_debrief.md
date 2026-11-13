@@ -41,7 +41,7 @@ measure this without keeping the true purpose hidden during the task.
 
 Your responses help us understand how people can be protected from
 misplaced trust in AI recommendations. If you have questions or want your
-data withdrawn, contact: [researcher email].
+data withdrawn, contact: **quanjun.leah.li@gmail.com**.
 
 Thank you for helping with this research.
 
